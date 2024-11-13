@@ -1,0 +1,66 @@
+﻿@page
+@model PowerHouse.Pages.KontaktModel
+
+@if (TempData["SubmissionSuccess"] != null)
+{
+    <div id="submissionSuccessMessage" class="alert alert-success" role="alert">
+        Uspješno poslano!
+        <button type="button" id="okButton" class="btn btn-success btn-sm ml-2">OK</button>
+    </div>
+
+    <script>
+        // Function to hide the success message
+        function hideSuccessMessage() {
+            document.getElementById("submissionSuccessMessage").style.display = 'none';
+        }
+
+        // Hide the message after 5 seconds (if not dismissed)
+        var timeoutId = setTimeout(hideSuccessMessage, 5000);
+
+        // Handle click on OK button
+        document.getElementById("okButton").addEventListener("click", function () {
+            clearTimeout(timeoutId); // Cancel the automatic hide
+            hideSuccessMessage(); // Hide the message immediately
+        });
+    </script>
+}
+
+@if (!ModelState.IsValid)
+{
+    <div id="submissionErrorMessage" class="alert alert-danger" role="alert">
+        @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@modelError.ErrorMessage</p>
+        }
+    </div>
+}
+
+@if (TempData["SubmissionSuccess"] == null)
+{
+    <form asp-controller="Kontakt" asp-action="OnPost" method="post">
+
+        <fieldset>
+            <div class="form-group">
+                <label asp-for="FormData.Email" class="form-label mt-4">Unesite svoj mail</label>
+                <input asp-for="FormData.Email" type="email" class="form-control" placeholder="E-mail">
+                <small id="emailHelp" class="form-text text-muted">Vaš mail nećemo dijeliti!</small>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormData.Name" class="form-label mt-4">Ime</label>
+                <input asp-for="FormData.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="FormData.Message" class="form-label mt-4">Upit</label>
+                <textarea asp-for="FormData.Message" class="form-control" rows="4"></textarea>
+            </div>
+            <br />
+
+            <button type="submit" class="btn btn-primary">Pošalji</button>
+        </fieldset>
+    </form>
+}
+<div style="margin-top:10px">
+<h5>Email - info@power-house.hr </h5>
+</div>
+
+

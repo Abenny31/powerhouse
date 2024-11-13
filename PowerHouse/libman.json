@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "filesystem",
+  "libraries": [
+    {
+      "library": "C:\\Users\\Ivana\\Downloads\\startbootstrap-agency-gh-pages",
+      "destination": "wwwroot/lib/startbootstrap-agency-gh-pages/"
+    }
+  ]
+}

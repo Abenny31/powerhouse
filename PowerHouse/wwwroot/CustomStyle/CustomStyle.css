@@ -1,0 +1,54 @@
+﻿#map {
+    width: 100%; /* Set the width to 100% for responsiveness */
+    height: 400px; /* Set a fixed height or use another unit, such as percentage, if desired */
+}
+
+/* Media query for smaller screens (adjust as needed) */
+@media (max-width: 768px) {
+    #map {
+        height: 300px; /* Adjust the height for smaller screens */
+    }
+}
+
+.responsive-image {
+    max-width: 100%; /* The image will not exceed its original size */
+    height: auto; /* The image's height will adjust proportionally */
+}
+
+/*custom*/
+.nav-scroll {
+    transition: top 0.3s;
+}
+
+.nav-hidden {
+    top: -50px; /* Adjust the value as needed */
+}
+
+.navbar.fixed-top {
+    transition: top 0.3s;
+}
+
+.navbar.fixed-top.nav-hidden {
+    top: -50px; /* Adjust the value as needed */
+}
+
+.main-content {
+    margin-top: 80px; /* Initial margin-top value */
+    transition: margin-top 0.3s; /* Add a smooth transition effect */
+}
+.main-content.nav-hidden {
+    margin-top: 20px; /* Adjusted margin-top value when hidden */
+}
+
+.navbar-logo {
+    max-width: 40px; /* Adjust the value as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+.d-none {
+    display: none !important;
+}
+
+.s-logo  {
+    max-width: 40px !important;
+    height: auto !important;
+}
