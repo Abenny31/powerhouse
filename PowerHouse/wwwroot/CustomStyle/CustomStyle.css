@@ -1,4 +1,4 @@
-﻿#map {
+#map {
     width: 100%; /* Set the width to 100% for responsiveness */
     height: 400px; /* Set a fixed height or use another unit, such as percentage, if desired */
 }
@@ -13,7 +13,60 @@
 .responsive-image {
     max-width: 100%; /* The image will not exceed its original size */
     height: auto; /* The image's height will adjust proportionally */
+    aspect-ratio: attr(width) / attr(height);
+    object-fit: contain;
+    display: block;
 }
+
+/* Fix for Safari: force aspect-ratio and override height if set by Bootstrap or inline */
+img.img-fluid:not(.navbar-logo), 
+img.responsive-image:not(.navbar-logo) {
+    max-width: 100%;
+    height: auto;
+    width: auto; /* Let the image maintain its aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image if it's not full width */
+}
+
+/* Optional: If you want to enforce a square aspect for icons */
+img.square-icon {
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    width: 90px !important;
+    height: 90px !important;
+}
+
+/* Target Safari specifically */
+@media not all and (min-resolution:.001dpcm) {
+  @supports (-webkit-appearance:none) {
+    img {
+      max-width: 100%;
+      height: auto;
+      width: auto; /* Let the image maintain its aspect ratio */
+    }
+    .carousel-item img, .about-img img, .project-item img {
+      height: auto !important;
+      width: 100% !important;
+      aspect-ratio: auto !important;
+      object-fit: contain !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      min-height: 0 !important;
+    }
+  }
+}
+
+/* PestKit overrides for all browsers */
+.carousel-item img, .about-img img, .project-item img {
+  max-width: 100%;
+  height: auto;
+  width: auto; /* Let the image maintain its aspect ratio */
+  display: block;
+  margin: 0 auto; /* Center the image if it's not full width */
+  object-fit: contain;
+  object-position: center;
+}
+
 
 /*custom*/
 .nav-scroll {
@@ -42,7 +95,9 @@
 
 .navbar-logo {
     max-width: 40px; /* Adjust the value as needed */
+    width: 40px; /* Fixed width */
     height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure proper fitting */
 }
 .d-none {
     display: none !important;
