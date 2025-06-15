@@ -19,7 +19,7 @@
 }
 
 /* Fix for Safari: force aspect-ratio and override height if set by Bootstrap or inline */
-img.img-fluid:not(.navbar-logo), 
+img.img-fluid:not(.navbar-logo),
 img.responsive-image:not(.navbar-logo) {
     max-width: 100%;
     height: auto;
@@ -38,33 +38,34 @@ img.square-icon {
 
 /* Target Safari specifically */
 @media not all and (min-resolution:.001dpcm) {
-  @supports (-webkit-appearance:none) {
-    img {
-      max-width: 100%;
-      height: auto;
-      width: auto; /* Let the image maintain its aspect ratio */
+    @supports (-webkit-appearance:none) {
+        img {
+            max-width: 100%;
+            height: auto;
+            width: auto; /* Let the image maintain its aspect ratio */
+        }
+
+        .carousel-item img, .about-img img, .project-item img {
+            height: auto !important;
+            width: 100% !important;
+            aspect-ratio: auto !important;
+            object-fit: contain !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            min-height: 0 !important;
+        }
     }
-    .carousel-item img, .about-img img, .project-item img {
-      height: auto !important;
-      width: 100% !important;
-      aspect-ratio: auto !important;
-      object-fit: contain !important;
-      max-width: 100% !important;
-      max-height: 100% !important;
-      min-height: 0 !important;
-    }
-  }
 }
 
 /* PestKit overrides for all browsers */
 .carousel-item img, .about-img img, .project-item img {
-  max-width: 100%;
-  height: auto;
-  width: auto; /* Let the image maintain its aspect ratio */
-  display: block;
-  margin: 0 auto; /* Center the image if it's not full width */
-  object-fit: contain;
-  object-position: center;
+    max-width: 100%;
+    height: auto;
+    width: auto; /* Let the image maintain its aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image if it's not full width */
+    object-fit: contain;
+    object-position: center;
 }
 
 
@@ -81,17 +82,18 @@ img.square-icon {
     transition: top 0.3s;
 }
 
-.navbar.fixed-top.nav-hidden {
-    top: -50px; /* Adjust the value as needed */
-}
+    .navbar.fixed-top.nav-hidden {
+        top: -50px; /* Adjust the value as needed */
+    }
 
 .main-content {
     margin-top: 80px; /* Initial margin-top value */
     transition: margin-top 0.3s; /* Add a smooth transition effect */
 }
-.main-content.nav-hidden {
-    margin-top: 20px; /* Adjusted margin-top value when hidden */
-}
+
+    .main-content.nav-hidden {
+        margin-top: 20px; /* Adjusted margin-top value when hidden */
+    }
 
 .navbar-logo {
     max-width: 40px; /* Adjust the value as needed */
@@ -99,11 +101,54 @@ img.square-icon {
     height: auto; /* Maintain aspect ratio */
     object-fit: contain; /* Ensure proper fitting */
 }
+
 .d-none {
     display: none !important;
 }
 
-.s-logo  {
+.s-logo {
     max-width: 40px !important;
     height: auto !important;
+}
+
+/* === Custom Fix: Safari Image Container Height Patch === */
+
+.carousel-item,
+.project-item,
+.about-img {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance:none) {
+        .carousel-item,
+        .project-item,
+        .about-img {
+            height: auto !important;
+            min-height: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+        }
+
+            .carousel-item img,
+            .project-item img,
+            .about-img img {
+                width: 100% !important;
+                height: auto !important;
+                object-fit: contain !important;
+                aspect-ratio: auto !important;
+                display: block !important;
+                max-width: 100% !important;
+            }
+
+            .project-item::before,
+            .project-item::after,
+            .about-img::before,
+            .about-img::after {
+                height: 25% !important;
+            }
+    }
 }
