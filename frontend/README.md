@@ -4,4 +4,5 @@ This is a small React app replacing the original Razor views. Run `npm install` 
 
 The generated `index.html` in `wwwroot` is intentionally minimal. Insert links to
 your preferred CSS framework or custom styles in its `<head>` section to apply
-colors and design.
+colors and design. If you add a stylesheet such as `wwwroot/css/site.css`, link
+to it from the `<head>` of `index.html`.
