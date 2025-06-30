@@ -403,3 +403,6 @@ FodyWeavers.xsd
 
 .vscode
 PowerHouse/wwwroot/PestKit-1.0.0/
+
+# React build output
+frontend/build/

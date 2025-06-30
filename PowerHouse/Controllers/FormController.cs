@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc;
 using PowerHouse.Data;
 using PowerHouse.Models;
 
 namespace PowerHouse.Controllers
 {
-    public class FormController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class FormController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
@@ -14,36 +15,25 @@ namespace PowerHouse.Controllers
             _context = context;
         }
 
-
-        public bool SubmitForm(FormData formData)
+        [HttpPost]
+        public IActionResult SubmitForm(FormData formData)
         {
-            bool result = false;
             try
             {
                 _context.formDataDbSet.Add(formData);
                 _context.SaveChanges();
-
-                result = true;
+                return Ok(true);
             }
-            catch (Exception e)
-            { 
-            
+            catch
+            {
+                return BadRequest();
             }
-            return result;
         }
-        //[HttpPost]
-        //public IActionResult SubmitForm(FormData formData)
-        //{
-        //    // Save to the database
-        //    _context.formDataDbSet.Add(formData);
-        //    _context.SaveChanges();
 
-        //    // You can add code here to send an email if needed
-
-
-
-        //    // Return a partial view or JSON result if needed
-        //    return RedirectToPage("/Kontakt", new { success = true });
-        //}
+        [HttpGet]
+        public IActionResult GetForms()
+        {
+            return Ok(_context.formDataDbSet.ToList());
+        }
     }
 }
